@@ -1,0 +1,48 @@
+name: Build
+ 
+on:
+  push:
+    branches: 
+       - master
+       - develop
+
+env:
+ PROJECT_PATH: '.\actions-runner\_work\EscapeKowloon\EscapeKowloon'
+ 
+jobs:
+  # build-quest:
+  #  runs-on: self-hosted
+  #  steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v2
+  #     with:
+  #      path: quest
+  #      lfs: true
+  #      clean: false
+ 
+  #   - name: Unity Build For Quest
+  #     run: |
+  #        & C:\Opt\UnityEditor\2019.4.7f1\Editor\Unity.exe -quit -batchmode -projectPath .\actions-runner\_work\EscapeKowloon\EscapeKowloon\quest -executeMethod ApplicationBuild.BuildQuest -buildTarget Android -nographics -logFile - | Out-Host
+  #   - uses: actions/upload-artifact@v1
+  #     with:
+  #      name: TheRoof_Quest_${{github.run_number}}
+  #      path: .\quest\Build\Quest
+
+  build-standalone:
+   runs-on: self-hosted
+ 
+   steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+       path: standalone
+       lfs: true
+       clean: false
+ 
+    - name: Unity Build For Standalone
+      run: |
+         & C:\Opt\UnityEditor\2019.4.7f1\Editor\Unity.exe -quit -batchmode -projectPath .\actions-runner\_work\EscapeKowloon\EscapeKowloon\standalone -executeMethod ApplicationBuild.BuildStandAlone -buildTarget Standalone -nographics -logFile - | Out-Host
+    - uses: actions/upload-artifact@v1
+      with:
+       name: TheRoof_Standalone_${{github.run_number}}
+       path: .\standalone\Build\Standalone

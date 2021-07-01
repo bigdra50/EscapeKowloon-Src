@@ -1,0 +1,29 @@
+{
+    "name": "EscapeKowloon",
+    "references": [
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:f64c9ebcd7899c3448a08dc9f9ddbe30",
+        "GUID:593a5b492d29ac6448b1ebf7f035ef33",
+        "GUID:029c1c1b674aaae47a6841a0b89ad80e",
+        "GUID:dc47925d1a5fa2946bdd37746b2b5d48",
+        "GUID:5c01796d064528144a599661eaab93a6",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:1826c0224c0d048b88112c79bbb0cd85",
+        "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:831409e8f9d13b5479a3baef9822ad34",
+        "GUID:57c32fc907df0f54e8e6e8f0d2488336",
+        "GUID:b59fae9c7ebc1574e8690f2570b29d6f",
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+        "GUID:f66316306629e504ca16aead9a9ef20d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
