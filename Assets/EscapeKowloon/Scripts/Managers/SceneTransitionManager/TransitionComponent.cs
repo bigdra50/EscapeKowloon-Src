@@ -15,7 +15,6 @@ namespace SceneTransitionManager
     {
         [SerializeField] private float _transitionSeconds = 1f;
         [SerializeField] private Image _coverImage;
-        private OVRScreenFade _screenFade;
         [Inject] private ZenjectSceneLoader _zenjectSceneLoader;
 
         BoolReactiveProperty _isTransition = new BoolReactiveProperty(false);
@@ -29,15 +28,14 @@ namespace SceneTransitionManager
 
         private async UniTaskVoid Transition(string nextScene, Action<DiContainer> bindAction, CancellationToken token)
         {
-            _screenFade = FindObjectOfType<OVRScreenFade>();
             // 0 -> 1
             var startTime = Time.time;
             while (Time.time - startTime < _transitionSeconds)
             {
                 var rate = (Time.time - startTime) / _transitionSeconds;
                 //_coverImage.color.SetA(rate);
-                if (_screenFade != null)
-                    _screenFade.SetFadeLevel(rate);
+                if (OVRScreenFade.instance != null)
+                    OVRScreenFade.instance.SetExplicitFade(rate);
                 await UniTask.Yield();
             }
 
@@ -49,8 +47,8 @@ namespace SceneTransitionManager
             while (Time.time - startTime < _transitionSeconds)
             {
                 var rate = 1 - (Time.time - startTime) / _transitionSeconds;
-                if (_screenFade != null)
-                    _screenFade.SetFadeLevel(rate);
+                if (OVRScreenFade.instance != null)
+                    OVRScreenFade.instance.SetExplicitFade(rate);
                 await UniTask.Yield();
             }
 

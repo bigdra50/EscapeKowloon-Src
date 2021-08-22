@@ -4,9 +4,6 @@ using UnityEngine.Serialization;
 
 namespace EscapeKowloon.Scripts.Escaper
 {
-    /// <summary>
-    /// VRプレイヤーが滑らかに回転する挙動
-    /// </summary>
     public class LinearRotator : MonoBehaviour
     {
         public bool _enableRotation = true;
@@ -18,6 +15,10 @@ namespace EscapeKowloon.Scripts.Escaper
         private bool prevHatRight = false;
         public float RotationRatchet = 45.0f;
         private float buttonRotation = 0f;
+
+        private void Start()
+        {
+        }
 
         private void Update()
         {

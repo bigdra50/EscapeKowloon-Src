@@ -9,5 +9,6 @@ namespace EscapeKowloon.Scripts.Inputs
         IObservable<Unit> OnPressLeftUseItemButton { get; }
         IObservable<Unit> OnPressDownTeleportButton { get; }
         IObservable<Unit> OnPressUpTeleportButton { get; }
+        IObservable<Unit> OnMoveForward { get; }
     }
 }

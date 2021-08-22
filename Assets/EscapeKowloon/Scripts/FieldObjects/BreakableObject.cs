@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Triggers;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace EscapeKowloon.Scripts.FieldObjects
@@ -16,6 +17,7 @@ namespace EscapeKowloon.Scripts.FieldObjects
             _audioSource = GetComponent<AudioSource>();
         }
 
+        [Button]
         public async UniTask Break()
         {
             _renderer.enabled = false;

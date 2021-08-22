@@ -11,12 +11,12 @@ namespace EscapeKowloon.Scripts.Escaper
 {
     public class EscaperCore : MonoBehaviour, IEscaper
     {
-        [ShowInInspector] public BoolReactiveProperty IsMovable { get; } = new BoolReactiveProperty();
         public IObservable<Unit> OnDeadObservable => _onDeadObservable;
         public bool _isTeleportAvailable;
+        [ShowInInspector] public BoolReactiveProperty IsMovable { get; } = new BoolReactiveProperty();
         
         [Inject] private IEscaperInputEventProvider _input;
-        [SerializeField, Required] private Transform _spawnPoint;
+        [SerializeField] private Transform _spawnPoint;
         [SerializeField] private ItemHandler _rightItemHandler;
         [SerializeField] private ItemHandler _leftItemHandler;
         [SerializeField] private TeleportHandler _teleportHandler;
@@ -36,7 +36,7 @@ namespace EscapeKowloon.Scripts.Escaper
         }
 
 
-        private async void Start()
+        private void Start()
         {
             Initialize();
 

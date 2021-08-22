@@ -12,7 +12,7 @@ namespace EscapeKowloon.Scripts.Escaper
     {
         [Inject] private IEscaperInputEventProvider _inputEvent;
         [SerializeField] private HandType _handType;
-        [SerializeField, Required] private OVRGrabber _grabber;
+        [SerializeField, Required] OVRGrabber _grabber;
         [ShowInInspector, ReadOnly] private IItem _holdingItem;
 
 

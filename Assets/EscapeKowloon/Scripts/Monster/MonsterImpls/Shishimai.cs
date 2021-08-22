@@ -15,9 +15,9 @@ namespace EscapeKowloon.Scripts.Monster.MonsterImpls
 
         private void InitializeActionEffect()
         {
-            if (!TryGetComponent<INpcActionsRepository<NpcState>>(out var actionsRepository)) return;
+            if (!TryGetComponent<INpcActionsTable<NpcState>>(out var actionsRepository)) return;
 
-            var actionEffector = new MonsterActionableEffector(this, actionsRepository);
+            var actionEffector = new MonsterActionApplier(this, actionsRepository);
             _currentState.Subscribe(actionEffector.ApplyEffect).AddTo(this);
         }
 

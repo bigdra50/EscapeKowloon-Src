@@ -17,6 +17,10 @@ namespace EscapeKowloon.Scripts.Escaper
             _player.ObserveEveryValueChanged(p => p.transform.position)
                 .Where(p => p.y <= _respawnHeight)
                 .Subscribe(_ => Spawn(_spawnPoint));
+
+            //_player.GetComponent<EscaperCore>().OnDeadObservable
+            //    .Subscribe(_ => Spawn(_spawnPoint))
+            //    .AddTo(this);
         }
 
         void Spawn(Transform spawnPoint)

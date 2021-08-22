@@ -19,5 +19,8 @@ namespace EscapeKowloon.Scripts.Inputs
 
         public IObservable<Unit> OnPressUpTeleportButton =>
             OVRInputRx.OnPressRawButtonUpAsObservable(OVRInput.RawButton.RThumbstickDown);
+
+        public IObservable<Unit> OnMoveForward =>
+            Observable.EveryUpdate().Where(_ => Input.GetKey(KeyCode.W)).AsSingleUnitObservable();
     }
 }

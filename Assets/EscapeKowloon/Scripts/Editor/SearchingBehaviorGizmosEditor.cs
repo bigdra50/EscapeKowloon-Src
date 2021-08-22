@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using EscapeKowloon.Scripts.NpcActions.NpcActionImpls;
@@ -92,3 +93,4 @@ public static class SearchingBehaviorGizmosEditor
     }
 
 } // class SearchingBehaviorGizmosEditor
+#endif

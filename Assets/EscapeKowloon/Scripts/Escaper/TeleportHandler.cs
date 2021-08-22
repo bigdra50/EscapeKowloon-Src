@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -8,18 +9,18 @@ namespace EscapeKowloon.Scripts.Escaper
     public class TeleportHandler : MonoBehaviour
     {
         [SerializeField] GameObject pointer;
-        [SerializeField] private OVRScreenFade _fade;
         [SerializeField] private Camera _head;
-        [SerializeField] private Material material;
+        [SerializeField] Material material;
 
-        [SerializeField] private float distance = 10;
+        [SerializeField] float distance = 10;
 
-        [SerializeField] private float dropHeight = 5;
+        [SerializeField] float dropHeight = 5;
 
-        [SerializeField] private int positionCount = 10;
+        [SerializeField] int positionCount = 10;
 
-        [SerializeField] private float width = 0.1f;
+        [SerializeField] float width = 0.1f;
 
+        private OVRScreenFade _fade;
         private OVRPlayerController _ovrPlayerController;
         private GameObject _line;
         private LineRenderer _lRend;
@@ -33,6 +34,7 @@ namespace EscapeKowloon.Scripts.Escaper
             OVRManager.display.RecenterPose();
             InitLine();
             _ovrPlayerController = GetComponent<OVRPlayerController>();
+            _fade = OVRScreenFade.instance;
             _isMovable = true;
         }
 
@@ -76,20 +78,20 @@ namespace EscapeKowloon.Scripts.Escaper
         void Draw()
         {
             if (!_isDrawActive) return;
-            Vector3 p0 = pointer.transform.position;
-            Vector3 p1 = pointer.transform.position + pointer.transform.forward * distance / 2;
-            Vector3 p2 = pointer.transform.position + pointer.transform.forward * distance;
+            var p0 = pointer.transform.position;
+            var p1 = pointer.transform.position + pointer.transform.forward * distance / 2;
+            var p2 = pointer.transform.position + pointer.transform.forward * distance;
             p2.y = p0.y - dropHeight;
 
-            Vector3 _b012 = p0;
+            var _b012 = p0;
 
-            for (int i = 0; i < positionCount; i++)
+            for (var i = 0; i < positionCount; i++)
             {
                 float amp = ((float) i / (float) (positionCount - 1));
-                Vector3 b01 = Vector3.Lerp(p0, p1, amp);
-                Vector3 b12 = Vector3.Lerp(p1, p2, amp);
+                var b01 = Vector3.Lerp(p0, p1, amp);
+                var b12 = Vector3.Lerp(p1, p2, amp);
 
-                Vector3 b012 = Vector3.Lerp(b01, b12, amp);
+                var b012 = Vector3.Lerp(b01, b12, amp);
 
                 if (Physics.Linecast(_b012, b012, out _hit))
                 {
@@ -123,11 +125,13 @@ namespace EscapeKowloon.Scripts.Escaper
 
         private async UniTask Teleport(Transform current, Vector3 targetPos, float fadeTime)
         {
-            var prevFadeTime = _fade.fadeTime;
+            var prevFadeTime = OVRScreenFade.instance.fadeTime;
             _fade.fadeTime = fadeTime;
-            await _fade.Fade(0, 1f);
+            _fade.FadeOut();
+            await UniTask.Delay(TimeSpan.FromSeconds(_fade.fadeTime));
             current.position = targetPos;
-            await _fade.Fade(1f, 0);
+            _fade.FadeIn();
+            await UniTask.Delay(TimeSpan.FromSeconds(_fade.fadeTime));
             _fade.fadeTime = prevFadeTime;
         }
     }
